@@ -1,0 +1,32 @@
+{
+  "name": "hapi-browser-log",
+  "version": "0.0.0",
+  "description": "A Hapi extension for browser logging",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/firstandthird/hapi-browser-log.git"
+  },
+  "keywords": [
+    "hapi",
+    "browser",
+    "log",
+    "logging"
+  ],
+  "author": "First+Third",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/firstandthird/hapi-browser-log/issues"
+  },
+  "homepage": "https://github.com/firstandthird/hapi-browser-log#readme",
+  "devDependencies": {
+    "handlebars": "^3.0.3",
+    "hapi": "^8.8.0"
+  }
+}

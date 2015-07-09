@@ -1,0 +1,26 @@
+<h1>Hello</h1>
+
+<a href="#" onclick="javascript: callNoFunction();  return false;">Click me</a> |
+<a href="#" id="testFail">Ajax Test</a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="/hapi-browser-log.js"></script>
+<script type="text/javascript">
+  $(function(){
+    var logger = window.hapiLogger || {};
+
+    window.hapiLogger.debug = true;
+
+    logger.sendLog({test: 'yes'}, function(err, data) {
+    });
+
+
+    var testAjaxFail = function(e){
+      e.preventDefault();
+      $.get('/this-is-an-error', function() {
+        // Nothing
+      });
+    };
+    $("#testFail").on('click', testAjaxFail);
+  });
+</script>
