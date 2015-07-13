@@ -28,5 +28,8 @@
   "devDependencies": {
     "handlebars": "^3.0.3",
     "hapi": "^8.8.0"
+  },
+  "dependencies": {
+    "hoek": "^2.14.0"
   }
 }
