@@ -6,8 +6,6 @@ var server = new Hapi.Server();
 
 server.connection({ port: process.argv[2] || 3000 });
 
-console.log(Path.join(__dirname, 'templates'));
-
 server.views({
   engines: {
     html: require('handlebars')
