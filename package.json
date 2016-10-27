@@ -7,7 +7,9 @@
     "example": "example"
   },
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "lint": "eslint .",
+    "dev": "nodemon example/server.js"
   },
   "repository": {
     "type": "git",
@@ -26,10 +28,18 @@
   },
   "homepage": "https://github.com/firstandthird/hapi-browser-log#readme",
   "devDependencies": {
-    "handlebars": "^3.0.3",
-    "hapi": "^8.8.0"
+    "eslint": "^3.8.1",
+    "eslint-config-firstandthird": "^3.0.2",
+    "eslint-plugin-import": "1.14.0",
+    "handlebars": "^4.0.5",
+    "hapi": "^15.2.0",
+    "inert": "^4.0.2",
+    "vision": "^4.1.0"
   },
   "dependencies": {
-    "hoek": "^2.14.0"
+    "hoek": "^4.1.0"
+  },
+  "eslintConfig": {
+    "extends": "firstandthird"
   }
 }

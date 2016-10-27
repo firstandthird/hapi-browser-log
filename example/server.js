@@ -1,35 +1,48 @@
-var Hapi = require('hapi');
-var Path = require('path');
+/* eslint-disable no-console */
+const Hapi = require('hapi');
 
-
-var server = new Hapi.Server();
+const server = new Hapi.Server({
+  debug: {
+    log: ['hapi-browser-log']
+  }
+});
 
 server.connection({ port: process.argv[2] || 3000 });
-
-server.views({
-  engines: {
-    html: require('handlebars')
-  },
-  relativeTo: __dirname, 
-  path: './views' 
-});
 
 server.route({
   method: 'GET',
   path: '/',
-  handler: function(request, reply) {
+  handler(request, reply) {
     reply.view('main');
   }
 });
 
-server.register({register: require('../')}, function(err) {
-  if(err) {
-    console.log('Failed to load plugin', err);
-
+server.register([
+  { register: require('vision') },
+  { register: require('inert') },
+  {
+    register: require('../'),
+    options: {
+      serveScript: true
+    }
+  },
+], (err) => {
+  if (err) {
+    throw err;
   }
 
-  server.start(function() {
-    console.log('Server Started');
+  server.views({
+    engines: {
+      html: require('handlebars')
+    },
+    relativeTo: __dirname,
+    path: './views'
   });
 
+  server.start((serverErr) => {
+    if (serverErr) {
+      throw serverErr;
+    }
+    console.log('Server Started');
+  });
 });
