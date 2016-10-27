@@ -1,4 +1,9 @@
 
+2.0.0 / 2016-10-27
+==================
+
+  * changed error -> browser-error.  Better stack trace logging
+
 1.0.0 / 2016-10-27
 ==================
 
