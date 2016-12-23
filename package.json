@@ -30,9 +30,9 @@
   "devDependencies": {
     "eslint": "^3.8.1",
     "eslint-config-firstandthird": "^3.0.2",
-    "eslint-plugin-import": "1.14.0",
+    "eslint-plugin-import": "2.2.0",
     "handlebars": "^4.0.5",
-    "hapi": "^15.2.0",
+    "hapi": "^16.0.2",
     "inert": "^4.0.2",
     "vision": "^4.1.0"
   },
