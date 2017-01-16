@@ -1,4 +1,13 @@
 
+2.1.1 / 2017-01-16
+==================
+
+  * Version bump
+  * Merge pull request #6 from firstandthird/ignoreEmptyPayload
+  * Merge pull request #5 from firstandthird/greenkeeper/update-all
+  * bugfix: ignore empty payload
+  * chore(package): update dependencies
+
 2.1.0 / 2016-10-27
 ==================
 
