@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/firstandthird/hapi-browser-log#readme",
   "devDependencies": {
-    "eslint": "^3.8.1",
+    "eslint": "^3.16.0",
     "eslint-config-firstandthird": "^3.0.2",
     "eslint-plugin-import": "2.2.0",
     "handlebars": "^4.0.5",
