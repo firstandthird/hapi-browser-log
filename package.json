@@ -29,7 +29,7 @@
   "homepage": "https://github.com/firstandthird/hapi-browser-log#readme",
   "devDependencies": {
     "eslint": "^3.8.1",
-    "eslint-config-firstandthird": "^3.0.2",
+    "eslint-config-firstandthird": "^3.3.0",
     "eslint-plugin-import": "2.2.0",
     "handlebars": "^4.0.5",
     "hapi": "^16.0.2",
