@@ -3,9 +3,6 @@
   "version": "2.1.1",
   "description": "A Hapi extension for browser logging",
   "main": "index.js",
-  "directories": {
-    "example": "example"
-  },
   "scripts": {
     "test": "test",
     "lint": "eslint .",
