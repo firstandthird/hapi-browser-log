@@ -3,10 +3,13 @@
   "version": "3.3.0",
   "description": "A Hapi extension for browser logging",
   "main": "index.js",
+  "engine": {
+    "node": ">=8.0.0"
+  },
   "scripts": {
-    "test": "test",
+    "test": "lab --leaks -t 100 -e test ",
     "lint": "eslint .",
-    "dev": "nodemon example/server.js"
+    "example": "node example/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,16 +28,18 @@
   },
   "homepage": "https://github.com/firstandthird/hapi-browser-log#readme",
   "devDependencies": {
-    "eslint": "^3.8.1",
-    "eslint-config-firstandthird": "^3.0.2",
-    "eslint-plugin-import": "2.2.0",
+    "code": "^5.1.2",
+    "eslint": "^4.13.1",
+    "eslint-config-firstandthird": "^4.3.0",
+    "eslint-plugin-import": "^2.8.0",
     "handlebars": "^4.0.5",
-    "hapi": "^16.0.2",
-    "inert": "^4.0.2",
-    "vision": "^4.1.0"
+    "hapi": "^17.2.0",
+    "inert": "^5.0.1",
+    "lab": "^15.1.2",
+    "vision": "^5.2.0"
   },
   "dependencies": {
-    "hoek": "^4.1.0",
+    "hoek": "^5.0.2",
     "useragent": "^2.2.1"
   },
   "eslintConfig": {
