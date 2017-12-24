@@ -1,6 +1,6 @@
 {
   "name": "hapi-browser-log",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "A Hapi extension for browser logging",
   "main": "index.js",
   "engine": {
