@@ -22,7 +22,8 @@ const startServer = async function() {
   await server.register({
     plugin: require('../'),
     options: {
-      serveScript: true
+      serveScript: true,
+      endpoint: '/api/errors-logs'
     }
   });
 

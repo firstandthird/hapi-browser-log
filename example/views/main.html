@@ -9,6 +9,11 @@
   $(function(){
     var logger = window.hapiLogger || {};
 
+    logger.configure({
+      debug: false,
+      logEndpoint: 'api/errors-logs'
+    });
+
     logger.sendLog({test: 'yes'}, function(err, data) {
     });
 
