@@ -5,7 +5,8 @@ const userAgentLib = require('useragent');
 const defaults = {
   endpoint: '/api/browser-log',
   serveScript: false,
-  tags: ['hapi-browser-log']
+  tags: ['hapi-browser-log'],
+  routeConfig: {}
 };
 
 const register = function(server, options) {
@@ -34,7 +35,7 @@ const register = function(server, options) {
     };
   }
 
-  server.route({
+  const route = {
     method: 'POST',
     path: settings.endpoint,
     handler(request, h) {
@@ -58,7 +59,9 @@ const register = function(server, options) {
 
       return { success: true };
     }
-  });
+  };
+
+  server.route(Hoek.applyToDefaults(route, settings.routeConfig));
 
   if (settings.serveScript) {
     server.dependency(['inert']);
