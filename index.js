@@ -35,10 +35,11 @@ const register = function(server, options) {
     };
   }
 
-  const route = {
+  server.route({
     method: 'POST',
     path: settings.endpoint,
-    handler(request, h) {
+    config: settings.routeConfig,
+    handler(request) {
       if (!request.payload || !request.payload.data) {
         return { success: false };
       }
@@ -59,9 +60,7 @@ const register = function(server, options) {
 
       return { success: true };
     }
-  };
-
-  server.route(Hoek.applyToDefaults(route, settings.routeConfig));
+  });
 
   if (settings.serveScript) {
     server.dependency(['inert']);
