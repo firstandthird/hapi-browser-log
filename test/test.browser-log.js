@@ -1,4 +1,5 @@
 const Hapi = require('hapi');
+const Joi = require('joi');
 const code = require('code');
 const lab = exports.lab = require('lab').script();
 const hapiBrowserLog = require('../index.js');
@@ -221,10 +222,7 @@ lab.test('serves script', { timeout: 5000 }, async () => {
   code.expect(actualScript.toString()).to.equal(response.result);
 });
 
-lab.test('route configuration', { timeout: 5000 }, async flags => {
-  const overWrittenHandler = function overWrittenHandler() {
-    return 'something';
-  };
+lab.test('route configuration', { timeout: 5000 }, async () => {
   await server.register(require('inert'));
   await server.register({
     plugin: hapiBrowserLog,
@@ -233,14 +231,20 @@ lab.test('route configuration', { timeout: 5000 }, async flags => {
       tags: ['error'],
       ignore: 'Uncaught',
       routeConfig: {
-        handler: flags.mustCall(overWrittenHandler, 1)
+        validate: {
+          query: {
+            test: Joi.required()
+          }
+        }
       }
     }
   });
 
-  await server.inject({
+  const response = await server.inject({
     method: 'POST',
     url: '/api/browser-log',
     payload
   });
+
+  code.expect(response.statusCode).to.equal(400);
 });
