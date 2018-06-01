@@ -1,7 +1,8 @@
 const Hapi = require('hapi');
+const Joi = require('joi');
 const code = require('code');
 const lab = exports.lab = require('lab').script();
-const hapiSlow = require('../index.js');
+const hapiBrowserLog = require('../index.js');
 const util = require('util');
 const fs = require('fs');
 
@@ -37,7 +38,7 @@ let server;
 lab.beforeEach((done) => {
   server = new Hapi.Server({
     debug: {
-      log: ['hapi-slow']
+      log: ['hapi-browser-log']
     },
     host: 'localhost',
     port: 8000
@@ -61,7 +62,7 @@ lab.test('logs error', { timeout: 5000 }, async () => {
   });
 
   await server.register({
-    plugin: hapiSlow,
+    plugin: hapiBrowserLog,
     options: {
       threshold: 10,
       tags: ['error']
@@ -92,7 +93,7 @@ lab.test('logs error without UA', { timeout: 5000 }, async () => {
   });
 
   await server.register({
-    plugin: hapiSlow,
+    plugin: hapiBrowserLog,
     options: {
       threshold: 10,
       tags: ['error']
@@ -118,7 +119,7 @@ lab.test('invalid request', { timeout: 5000 }, async () => {
   });
 
   await server.register({
-    plugin: hapiSlow,
+    plugin: hapiBrowserLog,
     options: {
       threshold: 10,
       tags: ['error']
@@ -151,7 +152,7 @@ lab.test('supports ignore', { timeout: 5000 }, async () => {
   });
 
   await server.register({
-    plugin: hapiSlow,
+    plugin: hapiBrowserLog,
     options: {
       threshold: 10,
       tags: ['error'],
@@ -179,7 +180,7 @@ lab.test('ignore not valid', { timeout: 5000 }, async () => {
   });
 
   await server.register({
-    plugin: hapiSlow,
+    plugin: hapiBrowserLog,
     options: {
       threshold: 10,
       tags: ['error'],
@@ -200,7 +201,7 @@ lab.test('ignore not valid', { timeout: 5000 }, async () => {
 lab.test('serves script', { timeout: 5000 }, async () => {
   await server.register(require('inert'));
   await server.register({
-    plugin: hapiSlow,
+    plugin: hapiBrowserLog,
     options: {
       threshold: 10,
       tags: ['error'],
@@ -219,4 +220,31 @@ lab.test('serves script', { timeout: 5000 }, async () => {
 
   code.expect(response.statusCode).to.equal(200);
   code.expect(actualScript.toString()).to.equal(response.result);
+});
+
+lab.test('route configuration', { timeout: 5000 }, async () => {
+  await server.register(require('inert'));
+  await server.register({
+    plugin: hapiBrowserLog,
+    options: {
+      threshold: 10,
+      tags: ['error'],
+      ignore: 'Uncaught',
+      routeConfig: {
+        validate: {
+          query: {
+            test: Joi.required()
+          }
+        }
+      }
+    }
+  });
+
+  const response = await server.inject({
+    method: 'POST',
+    url: '/api/browser-log',
+    payload
+  });
+
+  code.expect(response.statusCode).to.equal(400);
 });

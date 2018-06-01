@@ -5,7 +5,8 @@ const userAgentLib = require('useragent');
 const defaults = {
   endpoint: '/api/browser-log',
   serveScript: false,
-  tags: ['hapi-browser-log']
+  tags: ['hapi-browser-log'],
+  routeConfig: {}
 };
 
 const register = function(server, options) {
@@ -37,7 +38,8 @@ const register = function(server, options) {
   server.route({
     method: 'POST',
     path: settings.endpoint,
-    handler(request, h) {
+    config: settings.routeConfig,
+    handler(request) {
       if (!request.payload || !request.payload.data) {
         return { success: false };
       }
