@@ -3,6 +3,7 @@
   "version": "4.1.0",
   "description": "A Hapi extension for browser logging",
   "main": "index.js",
+  "module": "lib/browser/script.js",
   "engine": {
     "node": ">=8.0.0"
   },
