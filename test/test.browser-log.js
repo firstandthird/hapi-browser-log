@@ -198,6 +198,30 @@ lab.test('ignore not valid', { timeout: 5000 }, async () => {
   code.expect(statements.length).to.equal(1);
 });
 
+lab.test('custom logs endpoint', { timeout: 5000 }, async () => {
+  const statements = [];
+
+  server.events.on('log', (logObj) => {
+    statements.push(logObj.data);
+  });
+
+  await server.register({
+    plugin: hapiSlow,
+    options: {
+      endpoint: '/api/custom-errors-endpoint'
+    }
+  });
+
+  const response = await server.inject({
+    method: 'POST',
+    url: '/api/custom-errors-endpoint',
+    payload
+  });
+
+  code.expect(response.statusCode).to.equal(200);
+  code.expect(statements.length).to.equal(1);
+});
+
 lab.test('serves script', { timeout: 5000 }, async () => {
   await server.register(require('inert'));
   await server.register({
